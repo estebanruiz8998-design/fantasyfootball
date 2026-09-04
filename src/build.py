@@ -59,6 +59,8 @@ def write_tiers(players):
         cur = None
         for p in sorted(by_pos[pos], key=lambda x: -x.proj):
             if p.tier != cur:
+                if cur is not None:
+                    lines.append("")
                 cur = p.tier
                 lines.append(f"**Tier {cur}**")
                 lines.append("")

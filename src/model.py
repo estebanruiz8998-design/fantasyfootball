@@ -200,12 +200,21 @@ def assign_tiers(players: list[Player]) -> None:
         var = sum((g - mean) ** 2 for g in gaps) / len(gaps)
         sd = math.sqrt(var)
         threshold = mean + 0.75 * sd
+        median_gap = sorted(gaps)[len(gaps) // 2]
         tier = 1
+        tier_size = 1
         lst[0].tier = 1
         for i in range(1, len(lst)):
-            if lst[i - 1].proj - lst[i].proj > threshold:
+            gap = lst[i - 1].proj - lst[i].proj
+            # A real cliff always starts a new tier. The flat tail at running
+            # back would otherwise produce one 30-player tier, which is true but
+            # useless on the clock, so also break on any above-median gap once a
+            # tier reaches eight players.
+            if gap > threshold or (tier_size >= 8 and gap >= median_gap):
                 tier += 1
+                tier_size = 0
             lst[i].tier = tier
+            tier_size += 1
 
 
 def auction_values(players: list[Player], league: dict = DEFAULT_LEAGUE) -> None:

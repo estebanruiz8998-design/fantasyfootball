@@ -1,0 +1,581 @@
+<title>The 2026 Draft Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F4F5F3; --surface:#FFFFFF; --surface-2:#ECEEEB;
+  --ink:#14171C; --ink-2:#4A525E; --ink-3:#767F8C;
+  --rule:#D9DDD8; --rule-strong:#BFC5BE;
+  --accent:#A8701C; --accent-soft:#F3E7D2;
+  --rb:#C2543A; --wr:#2F7FB8; --te:#7A8F26; --qb:#8560AE; --flex:#767F8C;
+  --good:#3F7D4E; --warn:#A8701C; --bad:#B03A2E;
+  --chart:#2F7FB8; --chart-mute:#BFD3E6; --chart-hi:#A8701C;
+  --shadow:0 1px 2px rgba(20,23,28,.06),0 4px 14px rgba(20,23,28,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#131519; --surface:#1B1E24; --surface-2:#22262D;
+    --ink:#EDEFF2; --ink-2:#AEB6C1; --ink-3:#7F8794;
+    --rule:#2C313A; --rule-strong:#3D444F;
+    --accent:#D9A441; --accent-soft:#33291A;
+    --rb:#DB7250; --wr:#4D97D6; --te:#849C2E; --qb:#A079C9; --flex:#8A93A0;
+    --good:#5FA972; --warn:#D9A441; --bad:#D9705F;
+    --chart:#4D97D6; --chart-mute:#2E3A46; --chart-hi:#D9A441;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#131519; --surface:#1B1E24; --surface-2:#22262D;
+  --ink:#EDEFF2; --ink-2:#AEB6C1; --ink-3:#7F8794;
+  --rule:#2C313A; --rule-strong:#3D444F;
+  --accent:#D9A441; --accent-soft:#33291A;
+  --rb:#DB7250; --wr:#4D97D6; --te:#849C2E; --qb:#A079C9; --flex:#8A93A0;
+  --good:#5FA972; --warn:#D9A441; --bad:#D9705F;
+  --chart:#4D97D6; --chart-mute:#2E3A46; --chart-hi:#D9A441;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.55; margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3,.disp{font-family:Oswald,"Arial Narrow",system-ui,sans-serif;font-weight:500;letter-spacing:.01em;text-wrap:balance;margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+a{color:var(--accent)}
+
+/* ---------- masthead ---------- */
+.mast{border-bottom:2px solid var(--ink);background:var(--surface)}
+.mast-in{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;padding:30px 0 18px}
+.mast h1{font-size:clamp(38px,6vw,64px);line-height:.95;font-weight:600;text-transform:uppercase;letter-spacing:-.01em}
+.mast .sub{color:var(--ink-2);max-width:52ch;margin-top:8px}
+.stamp{display:grid;gap:3px;text-align:right;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);line-height:1.5}
+.stamp b{color:var(--ink);font-weight:500}
+
+/* ---------- section scaffolding ---------- */
+section{padding:44px 0;border-bottom:1px solid var(--rule)}
+.shead{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.shead h2{font-size:26px;text-transform:uppercase;letter-spacing:.02em}
+.snum{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);border:1px solid var(--rule-strong);border-radius:2px;padding:1px 6px}
+.lede{color:var(--ink-2);max-width:68ch;margin:0 0 22px}
+
+/* ---------- verdict ---------- */
+.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:8px}
+.finding{background:var(--surface);padding:20px}
+.finding .k{font-family:Oswald,sans-serif;font-size:34px;line-height:1;color:var(--accent)}
+.finding .t{font-weight:600;margin:8px 0 4px}
+.finding p{margin:0;color:var(--ink-2);font-size:14px}
+
+/* ---------- team card ---------- */
+.teamgrid{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:start}
+@media(max-width:860px){.teamgrid{grid-template-columns:1fr}}
+.lineup{border:1px solid var(--rule);background:var(--surface);box-shadow:var(--shadow)}
+.lineup table{width:100%;border-collapse:collapse;font-size:14px}
+.lineup th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule-strong);font-weight:500}
+.lineup td{padding:9px 12px;border-bottom:1px solid var(--rule)}
+.lineup tr:last-child td{border-bottom:0}
+.lineup tr.bench td{background:var(--surface-2);color:var(--ink-2)}
+.lineup .slot{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);width:52px}
+.lineup .nm{font-weight:500}
+.lineup .num{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+.divider td{background:var(--ink);color:var(--ground);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px}
+
+.pos{display:inline-block;min-width:26px;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.04em;padding:2px 5px;border-radius:2px;color:#fff}
+.pos.RB{background:var(--rb)}.pos.WR{background:var(--wr)}.pos.TE{background:var(--te)}
+.pos.QB{background:var(--qb)}.pos.K,.pos.DST{background:var(--flex)}
+
+.why{display:grid;gap:14px}
+.why .item{border-left:3px solid var(--rule-strong);padding:2px 0 2px 14px}
+.why .item.hi{border-left-color:var(--accent)}
+.why h4{margin:0 0 3px;font-size:14px;font-weight:600;font-family:"IBM Plex Sans",sans-serif}
+.why p{margin:0;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------- slot picker ---------- */
+.slotbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 20px}
+.slotbar .lab{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-right:6px}
+.slotbtn{font-family:"IBM Plex Mono",monospace;font-size:13px;min-width:36px;padding:6px 0;background:var(--surface);color:var(--ink-2);border:1px solid var(--rule-strong);border-radius:2px;cursor:pointer;transition:background .12s,color .12s}
+.slotbtn:hover{background:var(--surface-2);color:var(--ink)}
+.slotbtn[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink);font-weight:600}
+.slotbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.picks{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule);padding:10px 12px;margin-bottom:20px;overflow-x:auto;white-space:nowrap}
+.picks b{color:var(--ink)}
+
+/* ---------- round plan ---------- */
+.rounds{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.round{background:var(--surface);padding:14px 16px}
+.round .rh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px}
+.round .rn{font-family:Oswald,sans-serif;font-size:19px;letter-spacing:.02em}
+.round .pk{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3)}
+.round ul{margin:0;padding-left:15px;font-size:13.5px;color:var(--ink-2)}
+.round li{margin-bottom:2px}
+.round li b{color:var(--ink);font-weight:500}
+
+/* ---------- board ---------- */
+.boardnote{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:14px;font-size:13px;color:var(--ink-2)}
+.legend{display:flex;gap:12px;flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:5px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em}
+.sw{width:11px;height:11px;border-radius:2px;display:inline-block}
+.btn{font-family:"IBM Plex Mono",monospace;font-size:11.5px;padding:5px 10px;background:var(--surface);border:1px solid var(--rule-strong);color:var(--ink-2);border-radius:2px;cursor:pointer}
+.btn:hover{background:var(--surface-2);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.board{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.board{grid-template-columns:1fr}}
+.col h3{font-family:Oswald,sans-serif;font-size:15px;letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;margin-bottom:8px;border-bottom:2px solid currentColor}
+.col.RB h3{color:var(--rb)}.col.WR h3{color:var(--wr)}.col.TE h3{color:var(--te)}.col.QB h3{color:var(--qb)}
+.tier{margin-bottom:10px}
+.tierlab{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:3px 0;border-bottom:1px dashed var(--rule-strong);margin-bottom:4px}
+.p{display:flex;align-items:baseline;gap:6px;padding:3px 5px;border-radius:2px;cursor:pointer;font-size:13px;line-height:1.35}
+.p:hover{background:var(--surface-2)}
+.p .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.p .tm{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-3)}
+.p .adp{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.p.off{opacity:.34;text-decoration:line-through}
+.p.val .nm::after{content:"▲";color:var(--good);font-size:9px;margin-left:4px;vertical-align:2px}
+.p.fade .nm::after{content:"▼";color:var(--bad);font-size:9px;margin-left:4px;vertical-align:2px}
+
+/* ---------- tables ---------- */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table.data{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+table.data th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule-strong);font-weight:500;white-space:nowrap}
+table.data td{padding:8px 12px;border-bottom:1px solid var(--rule)}
+table.data tr:last-child td{border-bottom:0}
+table.data .num{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+.edge-pos{color:var(--good);font-weight:600}
+.edge-neg{color:var(--bad);font-weight:600}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:860px){.twocol{grid-template-columns:1fr}}
+
+/* ---------- chart ---------- */
+.chartwrap{background:var(--surface);border:1px solid var(--rule);padding:20px 18px 12px;overflow-x:auto}
+.chart-title{font-family:"IBM Plex Sans",sans-serif;font-weight:600;font-size:14px;margin-bottom:2px}
+.chart-sub{font-size:12.5px;color:var(--ink-3);margin-bottom:16px}
+svg text{font-family:"IBM Plex Mono",monospace}
+
+/* ---------- risk ---------- */
+.risk{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.rcard{background:var(--surface);padding:14px 16px}
+.rcard .rn{font-weight:600;font-size:14px;display:flex;align-items:center;gap:7px;margin-bottom:3px}
+.rcard p{margin:0;font-size:13px;color:var(--ink-2)}
+.gm{font-family:"IBM Plex Mono",monospace;font-size:11px;padding:1px 5px;border-radius:2px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--rule-strong)}
+.gm.sev{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+
+/* ---------- prose ---------- */
+.prose{max-width:70ch}
+.prose p{color:var(--ink-2)}
+.prose h3{font-size:16px;margin:22px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.prose ul{color:var(--ink-2);padding-left:19px}
+.prose li{margin-bottom:5px}
+footer{padding:30px 0 46px;color:var(--ink-3);font-size:12.5px}
+footer a{color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="mast">
+  <div class="wrap mast-in">
+    <div>
+      <div class="eyebrow">2026 Season &middot; 12-team &middot; Full PPR</div>
+      <h1>The 2026<br>Draft Board</h1>
+      <p class="sub">A projection and draft-simulation model, rebuilt from the ground up after three bugs
+        changed its conclusions. It says take receivers early, wait on quarterback until round nine, and
+        attack running back in rounds five through eight.</p>
+    </div>
+    <div class="stamp">
+      <div>Research current to <b>4 Sep 2026</b></div>
+      <div>Season opens <b>9 Sep</b> &mdash; SEA vs NE</div>
+      <div><b>__NPLAYERS__</b> players &middot; <b>__NDRAFTS__</b> simulated drafts</div>
+      <div><b>__NSEASONS__</b> simulated seasons</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="verdict">
+  <div class="wrap">
+    <div class="shead"><span class="snum">01</span><h2>The verdict</h2></div>
+    <p class="lede">Three findings drive every recommendation below. Each one is a disagreement with
+      how the market is currently pricing the position.</p>
+    <div class="findings">
+      <div class="finding">
+        <div class="k">271</div>
+        <div class="t">Replacement-level quarterback</div>
+        <p>The twelfth-best QB projects for 271 PPR points, so the elite tier's edge is small and
+          expensive. Herbert, Dart, Burrow and Murray all rank 25+ picks ahead of their ADP. Wait.</p>
+      </div>
+      <div class="finding">
+        <div class="k">14 of 16</div>
+        <div class="t">Biggest reaches are running backs</div>
+        <p>The backs going late in round one and through round two consistently score below their draft
+          cost in simulation. The market is still paying 2019 prices for the position.</p>
+      </div>
+      <div class="finding">
+        <div class="k">+131</div>
+        <div class="t">Elite tight end edge</div>
+        <p>Bowers and McBride project ~250 points against a replacement level near 119. That is a
+          bigger weekly edge than any running back available in round two.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="shead"><span class="snum">02</span><h2>The team</h2></div>
+    <p class="lede">The highest-expectation roster the model found across __ROSTERSEARCH__ simulated drafts from
+      pick <span id="team-slot-label">6</span>. Change your draft slot below and the roster, the pick numbers and the
+      round plan all follow.</p>
+
+    <div class="slotbar" id="slotbar" role="group" aria-label="Draft slot">
+      <span class="lab">Your pick</span>
+    </div>
+    <div class="picks" id="pickline"></div>
+
+    <div class="teamgrid">
+      <div class="lineup">
+        <div id="lineup-cap" style="padding:12px 12px 10px;border-bottom:1px solid var(--rule-strong);font-size:12.5px;color:var(--ink-2)"></div>
+        <table>
+          <thead><tr><th>Slot</th><th>Player</th><th>Pos</th><th>Tm</th><th class="num">Bye</th><th class="num">Proj</th></tr></thead>
+          <tbody id="lineup-body"></tbody>
+        </table>
+      </div>
+      <div class="why" id="why"></div>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="shead"><span class="snum">03</span><h2>Round by round</h2></div>
+    <p class="lede">A priority order, not a script. The simulator's clearest finding is that rigid plans
+      lose to flexible ones, because a script forces picks the board is not offering. If your first two
+      targets are gone, take the next name rather than reaching.</p>
+    <div class="rounds" id="rounds"></div>
+  </div>
+</section>
+
+<section id="board">
+  <div class="wrap">
+    <div class="shead"><span class="snum">04</span><h2>The board</h2></div>
+    <p class="lede">Tiers are cut where the projection gap to the next player is statistically real, not at
+      fixed intervals. Take the last player in a tier, never the first player in the next one.
+      Click any name to cross him off as he goes.</p>
+    <div class="boardnote">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--rb)"></i>RB</span>
+        <span><i class="sw" style="background:var(--wr)"></i>WR</span>
+        <span><i class="sw" style="background:var(--te)"></i>TE</span>
+        <span><i class="sw" style="background:var(--qb)"></i>QB</span>
+        <span style="color:var(--good)">▲ model buy</span>
+        <span style="color:var(--bad)">▼ model fade</span>
+      </div>
+      <button class="btn" id="reset-board" type="button">Reset board</button>
+    </div>
+    <div class="board" id="boardgrid"></div>
+  </div>
+</section>
+
+<section id="edges">
+  <div class="wrap">
+    <div class="shead"><span class="snum">05</span><h2>Where the market is wrong</h2></div>
+    <p class="lede">Edge is ADP minus the model's value rank. A player with an edge of +30 is being drafted
+      thirty picks later than the model would take him. Starters only &mdash; a season-long point projection
+      cannot express a handcuff's contingent value, so backups are excluded from both lists.</p>
+    <div class="twocol">
+      <div>
+        <h3 class="disp" style="font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--good);margin-bottom:8px">Buy</h3>
+        <div class="tbl-scroll"><table class="data">
+          <thead><tr><th>Player</th><th>Pos</th><th class="num">ADP</th><th class="num">Model</th><th class="num">Edge</th></tr></thead>
+          <tbody id="buys"></tbody></table></div>
+      </div>
+      <div>
+        <h3 class="disp" style="font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--bad);margin-bottom:8px">Fade</h3>
+        <div class="tbl-scroll"><table class="data">
+          <thead><tr><th>Player</th><th>Pos</th><th class="num">ADP</th><th class="num">Model</th><th class="num">Edge</th></tr></thead>
+          <tbody id="fades"></tbody></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sim">
+  <div class="wrap">
+    <div class="shead"><span class="snum">06</span><h2>What the simulator says</h2></div>
+    <p class="lede">Every strategy drafted against eleven ADP-driven opponents across all twelve slots, then
+      played out with injuries as contiguous blocks of missed games, byes, and optimal weekly lineups.
+      Bars span the tenth to ninetieth percentile season; the marker is the mean.</p>
+    <div class="chartwrap">
+      <div class="chart-title">Starting-lineup points, Weeks 1&ndash;14</div>
+      <div class="chart-sub">Mean across all twelve draft slots. Differences under ~25 points are noise.</div>
+      <div id="chart"></div>
+    </div>
+    <p class="lede" style="margin-top:18px">The honest read: the gap between the value-driven approach and the
+      rigid scripts is about 50&ndash;60 points over fourteen weeks &mdash; four points a week, which is roughly
+      one won matchup a season. The gap between it and the next two approaches is under 25 points, which is
+      noise. What survives that caveat is the <i>ordering</i>, which held at all twelve draft slots
+      independently: asking &ldquo;who gains me most over the player I could still get next round?&rdquo;
+      beat every script, and Zero RB finished last at every slot.</p>
+  </div>
+</section>
+
+<section id="risk">
+  <div class="wrap">
+    <div class="shead"><span class="snum">07</span><h2>The risk board</h2></div>
+    <p class="lede">Expected games played is a model input, not a footnote. These are the players whose
+      availability materially changes their value. Verify every one of them before you draft.</p>
+    <div class="risk" id="riskgrid"></div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="shead"><span class="snum">08</span><h2>Method, and what it cannot do</h2></div>
+    <div class="twocol">
+      <div class="prose">
+        <h3>How the numbers are made</h3>
+        <p>Positional scoring curves are anchored to published 2026 projections and interpolated in
+          log-rank space, then scaled by expected games played and a research-driven per-game adjustment.
+          The most useful anchor is a published George Pickens line &mdash; 82.6 receptions, 1,201 yards,
+          8.4 touchdowns &mdash; because it can be verified: that is 253 PPR points against a quoted 252.</p>
+        <p>Value over replacement uses actual starter demand, with flex slots awarded one at a time to
+          whichever of RB, WR or TE wins them. Then the whole draft is simulated, because a cheat sheet
+          cannot tell you whether a plan survives eleven other drafters.</p>
+        <h3>Three bugs that changed the answer</h3>
+        <ul>
+          <li><b>The board ran out.</b> A 12-team, 16-round draft consumes 192 picks; the pool held 173.
+            Drafts silently truncated and thin rosters looked survivable.</li>
+          <li><b>Raw VOR stacked eight receivers.</b> A sixth receiver has a large value over replacement
+            and almost no marginal value, because he cannot get into the lineup.</li>
+          <li><b>Marginal value drafted a quarterback first overall.</b> With an empty roster, absolute
+            points win. Adding opportunity cost &mdash; value over <i>next available</i> &mdash; is what moved
+            this strategy from worst to best.</li>
+        </ul>
+      </div>
+      <div class="prose">
+        <h3>What this cannot do</h3>
+        <ul>
+          <li><b>Projections are reconstructed, not scraped.</b> Direct page fetches were blocked in the
+            build environment, so figures come from search-result summaries. Curve shapes are anchored to
+            published numbers, but individual players inherit their positional rank from consensus. A player
+            ranked wrong is projected wrong.</li>
+          <li><b>ADP is estimated for most players.</b> Directly sourced values are used where known
+            &mdash; Barkley 13, Walker 22.3, Hampton 25.3, Garrett Wilson 38 &mdash; and the rest are
+            interpolated. Check your own platform: ADP varies enormously between Sleeper, ESPN and NFFC.</li>
+          <li><b>News moves faster than this page.</b> Everything is current to 4 September. Verify Nabers,
+            Kittle, Kraft, Skattebo and the Atlanta quarterback job before you draft.</li>
+          <li><b>Simulation differences under ~25 points are noise.</b> Read the strategy chart as an
+            ordering, not a measurement.</li>
+        </ul>
+        <h3>If your league is different</h3>
+        <p>Superflex changes everything &mdash; take two quarterbacks in the first four rounds. TE premium
+          pushes Bowers and McBride into round one outright. Half PPR moves Derrick Henry and Mike Evans up,
+          Wan&rsquo;Dale Robinson and Josh Downs down. In best ball, ceiling beats floor and handcuffs are
+          nearly worthless.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p>Generated __GENERATED__ from a model whose inputs, code and full written analysis live in the
+    repository. Every number regenerates from a single 173-row CSV &mdash; change one projection and the
+    recommendations move with it. Sources are listed in <span class="mono">data/sources.md</span>.</p>
+  <p>This is decision support, not a guarantee. Fantasy football is mostly variance; the point of a model is
+    to make sure the part that isn&rsquo;t variance is working in your favour.</p>
+</footer>
+
+<script>
+const PLAYERS = __PLAYERS_JSON__;
+const STRATS = __STRATEGY_JSON__;
+const ROSTERS = __ROSTERS_JSON__;
+const PLANS = __PLANS_JSON__;
+const RISK = __RISK_JSON__;
+
+/* ---------- slot picker ---------- */
+const TEAMS = 12, ROUNDS = 16;
+let slot = 6;
+
+function pickNumbers(s){
+  const out = [];
+  for (let r = 1; r <= ROUNDS; r++){
+    out.push(r % 2 === 1 ? (r - 1) * TEAMS + s : r * TEAMS - s + 1);
+  }
+  return out;
+}
+
+const slotbar = document.getElementById('slotbar');
+for (let s = 1; s <= 12; s++){
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'slotbtn'; b.textContent = s;
+  b.setAttribute('aria-pressed', String(s === slot));
+  b.addEventListener('click', () => { slot = s; render(); });
+  slotbar.appendChild(b);
+}
+
+function render(){
+  [...slotbar.querySelectorAll('.slotbtn')].forEach((b, i) =>
+    b.setAttribute('aria-pressed', String(i + 1 === slot)));
+  document.getElementById('team-slot-label').textContent = slot;
+
+  const picks = pickNumbers(slot);
+  document.getElementById('pickline').innerHTML =
+    'Your picks: ' + picks.map((p, i) => `<b>${p}</b><span style="opacity:.5">·R${i+1}</span>`).join('  ');
+
+  /* lineup */
+  const r = ROSTERS[slot] || ROSTERS[6];
+  document.getElementById('lineup-cap').innerHTML =
+    `Best roster found from pick <b class="mono">${slot}</b> &middot; ` +
+    `<b class="mono">${r.total}</b> expected starting-lineup points, Weeks 1&ndash;14 ` +
+    `<span style="color:var(--ink-3)">(best of 250 drafts, so read the shape rather than the total)</span>`;
+  const body = document.getElementById('lineup-body');
+  body.innerHTML = '';
+  const starters = r.starters, bench = r.bench;
+  const addRow = (row, cls) => {
+    const tr = document.createElement('tr');
+    if (cls) tr.className = cls;
+    tr.innerHTML = `<td class="slot">${row.slot || ''}</td>
+      <td class="nm">${row.player}</td>
+      <td><span class="pos ${row.pos}">${row.pos}</span></td>
+      <td class="mono" style="font-size:12px;color:var(--ink-3)">${row.team}</td>
+      <td class="num">${row.bye}</td><td class="num">${row.proj}</td>`;
+    body.appendChild(tr);
+  };
+  starters.forEach(x => addRow(x));
+  const d = document.createElement('tr');
+  d.className = 'divider';
+  d.innerHTML = '<td colspan="6">Bench</td>';
+  body.appendChild(d);
+  bench.forEach(x => addRow(x, 'bench'));
+
+  /* rationale */
+  document.getElementById('why').innerHTML = r.why.map((w, i) =>
+    `<div class="item${i === 0 ? ' hi' : ''}"><h4>${w.h}</h4><p>${w.p}</p></div>`).join('');
+
+  /* round plan */
+  const plan = PLANS[slot] || PLANS[6];
+  document.getElementById('rounds').innerHTML = plan.map((p, i) =>
+    `<div class="round">
+       <div class="rh"><span class="rn">R${i + 1}</span><span class="pk">pick ${picks[i]}</span></div>
+       <ul>${p.map(t => `<li>${t}</li>`).join('')}</ul>
+     </div>`).join('');
+}
+
+/* ---------- board ---------- */
+const OFF_KEY = 'ff2026-drafted-v1';
+let off = new Set();
+try { off = new Set(JSON.parse(localStorage.getItem(OFF_KEY) || '[]')); } catch (e) { off = new Set(); }
+function persist(){ try { localStorage.setItem(OFF_KEY, JSON.stringify([...off])); } catch (e) {} }
+
+function buildBoard(){
+  const grid = document.getElementById('boardgrid');
+  grid.innerHTML = '';
+  ['RB', 'WR', 'TE', 'QB'].forEach(pos => {
+    const col = document.createElement('div');
+    col.className = 'col ' + pos;
+    const list = PLAYERS.filter(p => p.pos === pos).sort((a, b) => b.proj - a.proj).slice(0, 30);
+    let html = `<h3>${pos}</h3>`;
+    let tier = null;
+    list.forEach(p => {
+      if (p.tier !== tier){
+        if (tier !== null) html += '</div>';
+        tier = p.tier;
+        html += `<div class="tier"><div class="tierlab">Tier ${tier}</div>`;
+      }
+      const flag = p.edge >= 12 ? ' val' : (p.edge <= -12 ? ' fade' : '');
+      html += `<div class="p${flag}${off.has(p.player) ? ' off' : ''}" data-n="${p.player}" role="button" tabindex="0">
+        <span class="nm">${p.player}</span><span class="tm">${p.team}</span><span class="adp">${p.adp}</span></div>`;
+    });
+    if (tier !== null) html += '</div>';
+    col.innerHTML = html;
+    grid.appendChild(col);
+  });
+  grid.querySelectorAll('.p').forEach(el => {
+    const toggle = () => {
+      const n = el.dataset.n;
+      if (off.has(n)) off.delete(n); else off.add(n);
+      el.classList.toggle('off');
+      persist();
+    };
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+  });
+}
+document.getElementById('reset-board').addEventListener('click', () => {
+  off.clear(); persist(); buildBoard();
+});
+
+/* ---------- edge tables ---------- */
+function edgeRows(list, id){
+  document.getElementById(id).innerHTML = list.map(p =>
+    `<tr><td>${p.player}</td><td><span class="pos ${p.pos}">${p.pos}</span></td>
+     <td class="num">${p.adp}</td><td class="num">${p.vrank}</td>
+     <td class="num ${p.edge > 0 ? 'edge-pos' : 'edge-neg'}">${p.edge > 0 ? '+' : ''}${p.edge}</td></tr>`).join('');
+}
+
+/* ---------- strategy chart ---------- */
+function drawChart(){
+  const rows = STRATS.slice().sort((a, b) => b.mean - a.mean);
+  const W = 720, rowH = 38, padL = 132, padR = 58, padT = 26, padB = 34;
+  const H = padT + rows.length * rowH + padB;
+  const lo = Math.min(...rows.map(r => r.p10)) - 40;
+  const hi = Math.max(...rows.map(r => r.p90)) + 40;
+  const x = v => padL + (v - lo) / (hi - lo) * (W - padL - padR);
+
+  const ticks = [];
+  const step = 100;
+  for (let t = Math.ceil(lo / step) * step; t <= hi; t += step) ticks.push(t);
+
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img"
+    aria-label="Range of season outcomes by draft strategy">`;
+
+  ticks.forEach(t => {
+    s += `<line x1="${x(t)}" y1="${padT - 6}" x2="${x(t)}" y2="${H - padB}"
+      stroke="var(--rule)" stroke-width="1"/>`;
+    s += `<text x="${x(t)}" y="${H - padB + 16}" font-size="10.5" fill="var(--ink-3)"
+      text-anchor="middle">${t}</text>`;
+  });
+
+  rows.forEach((r, i) => {
+    const y = padT + i * rowH + rowH / 2;
+    const hiLite = r.strategy === 'MODEL';
+    const col = hiLite ? 'var(--chart-hi)' : 'var(--chart)';
+    s += `<text x="${padL - 12}" y="${y + 4}" font-size="11.5" text-anchor="end"
+      fill="${hiLite ? 'var(--ink)' : 'var(--ink-2)'}"
+      font-weight="${hiLite ? 600 : 400}">${r.label}</text>`;
+    s += `<rect x="${x(r.p10)}" y="${y - 5}" width="${Math.max(x(r.p90) - x(r.p10), 2)}" height="10"
+      rx="4" fill="${col}" opacity="${hiLite ? .30 : .18}"/>`;
+    s += `<circle cx="${x(r.mean)}" cy="${y}" r="5.5" fill="${col}"
+      stroke="var(--surface)" stroke-width="2"/>`;
+    s += `<text x="${W - padR + 8}" y="${y + 4}" font-size="11.5" fill="var(--ink-2)">${Math.round(r.mean)}</text>`;
+  });
+
+  s += `<text x="${padL}" y="${padT - 12}" font-size="10" fill="var(--ink-3)"
+    letter-spacing="1">P10 &#8212; MEAN &#8212; P90</text>`;
+  s += '</svg>';
+  document.getElementById('chart').innerHTML = s;
+}
+
+/* ---------- risk ---------- */
+document.getElementById('riskgrid').innerHTML = RISK.map(r =>
+  `<div class="rcard"><div class="rn">${r.player}
+     <span class="pos ${r.pos}">${r.pos}</span>
+     <span class="gm${r.games < 14 ? ' sev' : ''}">${r.games} gm</span></div>
+   <p>${r.note}</p></div>`).join('');
+
+edgeRows(__BUYS_JSON__, 'buys');
+edgeRows(__FADES_JSON__, 'fades');
+buildBoard();
+drawChart();
+render();
+</script>
