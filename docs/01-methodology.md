@@ -99,7 +99,7 @@ them down changed the conclusions. Recording them because the corrections are
 the actual analytical content:
 
 **The board ran out.** A 12-team, 16-round draft consumes 192 picks; the curated
-player pool held 173. Drafts silently truncated at 14 rounds, so every roster
+player pool held fewer. Drafts silently truncated at 14 rounds, so every roster
 was short two players and thin rosters looked survivable. Fixed by adding an
 explicit replacement-level filler pool representing the waiver tier.
 

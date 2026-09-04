@@ -39,7 +39,7 @@ Change one number and re-run — the recommendations move with it.
 
 ```
 data/
-  players_2026.csv      173 players: consensus rank, ADP, expected games,
+  players_2026.csv      177 players: consensus rank, ADP, expected games,
                         per-game adjustment, risk, ceiling, and a note each
   sources.md            every source used, linked
 src/
@@ -68,14 +68,16 @@ reach a starting lineup, not on roster talent.
 Jaxson Dart, Joe Burrow and Kyler Murray all rank 25 or more picks better than
 their ADP.
 
-**Receivers are underpriced relative to running backs.** The running backs going
-in the back half of round one and all of round two consistently score below their
-draft cost in simulation. The market is still paying 2019 prices for the position.
+**Receivers are underpriced relative to running backs.** Among starters, 14 of
+the 16 largest gaps between ADP and model value in the wrong direction are
+running backs — Judkins, Irving, Etienne and Rhamondre Stevenson among them. The market is
+still paying 2019 prices for the position.
 
-**Rigid strategies lose to flexible ones.** Scripted plans — Zero RB, Robust RB —
-underperform because they force picks the board is not offering. The strategy
-that wins takes the best value over *next available* at every pick, with soft
-guardrails rather than hard rules.
+**Rigid strategies lose to flexible ones.** Scripted plans underperform because
+they force picks the board is not offering. Taking the best value over *next
+available* at every pick beat Zero RB and Robust RB at all twelve draft slots
+without exception, and beat every approach on average — though its 15-point
+margin over an Elite TE script is inside the noise band.
 
 ## Honest limitations
 
