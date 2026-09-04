@@ -453,7 +453,8 @@ function render(){
     const filler = row.player === 'Waiver tier';
     tr.innerHTML = `<td class="slot">${row.slot || ''}</td>
       <td class="nm">${filler
-        ? '<i style="font-weight:400;color:var(--ink-3)">stream it &mdash; any startable ' + row.pos + '</i>'
+        ? '<i style="font-weight:400;color:var(--ink-3)">' + (cls === 'bench'
+            ? 'waiver-tier depth' : 'stream it &mdash; any startable ' + row.pos) + '</i>'
         : row.player}</td>
       <td><span class="pos ${row.pos}">${row.pos}</span></td>
       <td class="mono" style="font-size:12px;color:var(--ink-3)">${filler ? '—' : row.team}</td>
@@ -502,7 +503,11 @@ function buildBoard(){
         tier = p.tier;
         html += `<div class="tier"><div class="tierlab">Tier ${tier}</div>`;
       }
-      const flag = p.edge >= 12 ? ' val' : (p.edge <= -12 ? ' fade' : '');
+      // Only flag players who are genuinely in startable range. Deep-bench
+      // quarterbacks all show a large positive edge simply because replacement
+      // level at the position is high, which is not a recommendation.
+      const relevant = p.vrank <= 130;
+      const flag = !relevant ? '' : (p.edge >= 12 ? ' val' : (p.edge <= -12 ? ' fade' : ''));
       html += `<div class="p${flag}${off.has(p.player) ? ' off' : ''}" data-n="${p.player}" role="button" tabindex="0">
         <span class="nm">${p.player}</span><span class="tm">${p.team}</span><span class="adp">${p.adp}</span></div>`;
     });

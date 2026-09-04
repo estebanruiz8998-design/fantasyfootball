@@ -186,6 +186,25 @@ def rationale(players: list[dict], slot: int) -> list[dict]:
               "what the round-two backs do.",
         ))
 
+    qbs = [p for p in players if p["pos"] == "QB"]
+    if len(qbs) >= 2 and qbs[1]["rd"] <= 10:
+        out.append(dict(
+            h="Two quarterbacks &mdash; read this as a caveat",
+            p=f"This roster took {qbs[0]['player']} and {qbs[1]['player']} within a few picks of each "
+              f"other. That is the search finding an outlier, not the model's normal behaviour: across "
+              f"every simulated draft it takes one quarterback in round 8 and only sometimes adds a "
+              f"second around round 10-11. One quarterback and an extra receiver is the simpler build.",
+        ))
+
+    tes = [p for p in players if p["pos"] == "TE"]
+    if len(tes) >= 2 and tes[1]["rd"] <= 8:
+        out.append(dict(
+            h="Two tight ends",
+            p=f"{tes[0]['player']} and {tes[1]['player'].rstrip('.')}. With tight-end replacement at 119 points, the "
+              f"second one is a genuine flex play rather than a backup &mdash; but it is also the most "
+              f"tradeable surplus on the roster.",
+        ))
+
     byes = Counter(p["bye"] for p in players)
     worst, n = byes.most_common(1)[0]
     if n >= 4:
@@ -268,7 +287,8 @@ def main():
                      vrank=r["vrank"], edge=int(r["edge"])) for r in lst]
 
     board = [dict(player=r["player"], pos=r["pos"], team=r["team"], tier=r["tier"],
-                  proj=r["proj"], adp=f"{r['adp']:g}", edge=r["edge"]) for r in rows]
+                  proj=r["proj"], adp=f"{r['adp']:g}", edge=r["edge"], vrank=r["vrank"])
+             for r in rows]
 
     risk = [dict(player=p, pos=q, games=f"{g:g}", note=n) for p, q, g, n in RISK_NOTES]
 
