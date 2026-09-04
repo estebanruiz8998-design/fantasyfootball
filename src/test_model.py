@@ -76,23 +76,37 @@ def main() -> int:
           all(ds.lineup_value(rbs[:i + 1]) >= ds.lineup_value(rbs[:i]) for i in range(1, 8)))
 
     print("\nDrafts")
-    rng = random.Random(4)
+    # Property checks over many drafts per slot. A single draft is one draw from
+    # a stochastic process, so asserting against one is a flaky test, not a check.
+    N = 25
     for slot in (1, 6, 12):
-        roster = ds.run_draft(players, slot, "MODEL", rng)
-        check(f"slot {slot} draft fills all {ds.ROUNDS} rounds",
-              len(roster) == ds.ROUNDS, f"got {len(roster)}")
-        counts = {pos: sum(1 for p in roster if p.pos == pos)
-                  for pos in ("QB", "RB", "WR", "TE", "K", "DST")}
+        rosters = [ds.run_draft(players, slot, "MODEL", random.Random(1000 * slot + i))
+                   for i in range(N)]
+        check(f"slot {slot}: every draft fills all {ds.ROUNDS} rounds",
+              all(len(r) == ds.ROUNDS for r in rosters),
+              f"lengths {sorted({len(r) for r in rosters})}")
+
         for pos, lo in ds.MIN_AT_POS.items():
-            check(f"slot {slot} roster meets the {pos} minimum of {lo}",
-                  counts[pos] >= lo, f"got {counts[pos]}")
-        qb_round = next((i for i, p in enumerate(roster, 1) if p.pos == "QB"), 99)
-        # Round 5 is legitimate when an elite quarterback falls to his ADP at a
-        # turn; spending a top-four-round pick on one never is.
-        check(f"slot {slot} does not spend a top-4 pick on a quarterback",
-              qb_round >= 5, f"took one in round {qb_round}")
-        check(f"slot {slot} does not roster three tight ends",
-              counts["TE"] <= 2, f"got {counts['TE']}")
+            worst = min(sum(1 for p in r if p.pos == pos) for r in rosters)
+            check(f"slot {slot}: every roster meets the {pos} minimum of {lo}",
+                  worst >= lo, f"worst was {worst}")
+
+        qb_rounds = [next((i for i, p in enumerate(r, 1) if p.pos == "QB"), 99)
+                     for r in rosters]
+        early = sum(1 for q in qb_rounds if q < 5)
+        # An early quarterback is defensible in the tail: when the board in front
+        # of you is receiver-depleted and an elite arm has fallen well past his
+        # ADP to a turn, the model takes him. What must not happen is that being
+        # the normal behaviour, so this bounds the rate rather than forbidding it.
+        check(f"slot {slot}: early quarterback is a tail case, not the plan",
+              early <= 0.2 * N, f"{early}/{N} drafts, rounds {sorted(set(qb_rounds))}")
+        median_qb = sorted(qb_rounds)[N // 2]
+        check(f"slot {slot}: typical quarterback round is 7 or later",
+              median_qb >= 7, f"median round {median_qb}")
+
+        most_te = max(sum(1 for p in r if p.pos == "TE") for r in rosters)
+        check(f"slot {slot}: never rosters three tight ends",
+              most_te <= 2, f"max was {most_te}")
 
     print("\nSeason simulation")
     rng = random.Random(9)

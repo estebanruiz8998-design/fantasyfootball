@@ -1,3 +1,4 @@
 __pycache__/
 *.pyc
 output/build_log.txt
+src/__pycache__/

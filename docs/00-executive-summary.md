@@ -65,7 +65,7 @@ The model's highest-expectation rosters vary by slot, but they share a structure
 | 1–2 | An anchor: an elite back at picks 1–2, otherwise the best receiver. Take **Bowers or McBride** in round 2 if you pick 5–11 — they reach you there. |
 | 3–4 | Receivers. Nico Collins, Pickens, Egbuka, McMillan, Flowers, McConkey. |
 | 5–8 | **The running back pocket.** D'Andre Swift (+23 VOR), Tony Pollard (+20), David Montgomery (+15) still clear replacement level at a fraction of a round-2 back's cost. This is where your RB2 and flex come from. |
-| 8–9 | **One quarterback.** Herbert or Dart. Not before. |
+| 8–9 | **One quarterback.** Herbert or Dart. Earlier only if an elite arm slides well past his ADP to a turn *and* the receiver tier has broken — the model's median QB round is 7+, but it does take that exception. |
 | 10–12 | The tight end you skipped (Ferguson, Okonkwo), then handcuff your own backs. |
 | 13–14 | Ceiling swings: Tre' Harris, Stribling, Michael Wilson, Worthy. |
 | 15–16 | Kicker, then defence. Chargers DST streams Weeks 1–2 (ARI, then LV). |

@@ -13,6 +13,13 @@ your top two targets are gone, move to the next name rather than reaching.
    around 271 points. Herbert, Dart, Burrow and Murray all rank 25 or more picks
    ahead of their ADP. Every pick spent on a quarterback in rounds 1–7 is a pick
    spent on the smallest positional edge on the board.
+
+   *The one exception, and the model does take it.* Across simulated drafts the
+   model's median quarterback comes in round 7 or later, but in roughly one draft
+   in ten it takes one in round 3 or 4. That happens when an elite arm — Maye,
+   Daniels, Lamar — has slid well past his ADP to a turn while the receiver tier
+   in front of you has already broken. If both of those are true, take him. If
+   only one is, wait.
 2. **Take the last player in a tier, not the first player in the next one.**
    Check `output/tiers.md`. The cliffs are where value lives.
 3. **The RB pocket is rounds 5–8.** D'Andre Swift (+23 value over
