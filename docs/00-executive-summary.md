@@ -33,19 +33,22 @@ slots**, then played out with injuries, byes and optimal weekly lineups.
 
 | Strategy | Mean pts (Wk 1–14) | P10 | Playoff wks |
 |---|---:|---:|---:|
-| **Value over next available** | **1,821** | **1,630** | **412** |
-| Elite TE | 1,803 | 1,621 | 407 |
-| Hero RB | 1,801 | 1,609 | 407 |
-| Best available (raw VOR) | 1,789 | 1,601 | 403 |
-| Robust RB | 1,770 | 1,589 | 401 |
-| Zero RB | 1,762 | 1,577 | 398 |
+| **Value over next available** | **1,817** | **1,632** | **411** |
+| Elite TE | 1,802 | 1,621 | 408 |
+| Hero RB | 1,799 | 1,608 | 407 |
+| Best available (raw VOR) | 1,787 | 1,601 | 402 |
+| Robust RB | 1,770 | 1,586 | 400 |
+| Zero RB | 1,764 | 1,580 | 399 |
 
-**Read this as an ordering, not a measurement.** The margin between the top
-approach and the next two is under 25 points, which is inside the noise band at
-these sample sizes. What is meaningful is that the ordering held at all twelve
-slots independently: the value-driven approach finished first at every one, and
-Zero RB finished last at every one. The real gap — about 55 points, or four
-points a week — is between thinking flexibly and following a script.
+**Read this as an ordering, not a measurement.** The 15-point margin between the
+top approach and Elite TE is inside the noise band at these sample sizes, so the
+two are not meaningfully separated. Two things are meaningful:
+
+- The value-driven approach was the best strategy at **10 of the 12 draft slots**.
+  Elite TE won at picks 10 and 12, where the top tight ends fall furthest.
+- It beat Robust RB and Zero RB — the two rigid scripts — at **all twelve slots
+  without exception**, by about 50 points, or four points a week. That is roughly
+  one won matchup a season.
 
 The winning approach is not a positional plan at all. At every pick it asks:
 *who gains me the most over the best player at his position I could still get at
