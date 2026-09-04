@@ -21,10 +21,10 @@ OUT = Path(__file__).resolve().parent.parent / "output"
 OUT.mkdir(exist_ok=True)
 
 QUICK = "--quick" in sys.argv
-N_DRAFTS = 25 if QUICK else 60
+N_DRAFTS = 25 if QUICK else 50
 N_SEASONS = 6 if QUICK else 10
-ROSTER_SEARCH = 60 if QUICK else 250
-ROSTER_EVAL = 12 if QUICK else 40
+ROSTER_SEARCH = 60 if QUICK else 180
+ROSTER_EVAL = 12 if QUICK else 30
 SLOTS = [1, 6, 12] if QUICK else list(range(1, 13))
 ALL_STRATS = list(STRATEGIES) + ["MODEL"]
 

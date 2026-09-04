@@ -435,7 +435,7 @@ function render(){
   document.getElementById('lineup-cap').innerHTML =
     `Best roster found from pick <b class="mono">${slot}</b> &middot; ` +
     `<b class="mono">${r.total}</b> expected starting-lineup points, Weeks 1&ndash;14 ` +
-    `<span style="color:var(--ink-3)">(best of 250 drafts, so read the shape rather than the total)</span>`;
+    `<span style="color:var(--ink-3)">(best of 180 drafts, so read the shape rather than the total)</span>`;
   const body = document.getElementById('lineup-body');
   body.innerHTML = '';
   const starters = r.starters, bench = r.bench;
@@ -526,7 +526,7 @@ function edgeRows(list, id){
 /* ---------- strategy chart ---------- */
 function drawChart(){
   const rows = STRATS.slice().sort((a, b) => b.mean - a.mean);
-  const W = 720, rowH = 38, padL = 132, padR = 58, padT = 26, padB = 34;
+  const W = 800, rowH = 38, padL = 196, padR = 58, padT = 26, padB = 34;
   const H = padT + rows.length * rowH + padB;
   const lo = Math.min(...rows.map(r => r.p10)) - 40;
   const hi = Math.max(...rows.map(r => r.p90)) + 40;
@@ -570,7 +570,7 @@ function drawChart(){
 document.getElementById('riskgrid').innerHTML = RISK.map(r =>
   `<div class="rcard"><div class="rn">${r.player}
      <span class="pos ${r.pos}">${r.pos}</span>
-     <span class="gm${r.games < 14 ? ' sev' : ''}">${r.games} gm</span></div>
+     <span class="gm${parseFloat(r.games) < 14 ? ' sev' : ''}">${r.games} gm</span></div>
    <p>${r.note}</p></div>`).join('');
 
 edgeRows(__BUYS_JSON__, 'buys');

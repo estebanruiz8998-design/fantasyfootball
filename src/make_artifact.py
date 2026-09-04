@@ -80,6 +80,8 @@ def parse_sim_results() -> tuple[list[dict], dict[int, dict]]:
     # Best roster per slot.
     rosters: dict[int, dict] = {}
     for block in re.split(r"^### Pick ", text, flags=re.M)[1:]:
+        # The final block runs to end of file, so cut it at the next H2.
+        block = re.split(r"^## ", block, flags=re.M)[0]
         slot = int(block.split("\n", 1)[0].strip())
         tot = re.search(r"Weeks 1-14: \*\*([\d.]+)\*\*", block)
         players = []
@@ -87,7 +89,10 @@ def parse_sim_results() -> tuple[list[dict], dict[int, dict]]:
             r"^\|\s*(\d+)\s*\|\s*(.+?)\s*\|\s*([A-Z]+)\s*\|\s*([A-Z]+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|$",
             block, re.M,
         ):
-            players.append(dict(rd=int(m.group(1)), player=m.group(2), pos=m.group(3),
+            name = m.group(2)
+            if name.startswith("_") or "waiver" in name.lower():
+                name = "Waiver tier"
+            players.append(dict(rd=int(m.group(1)), player=name, pos=m.group(3),
                                 team=m.group(4), bye=int(m.group(5)), proj=int(m.group(6))))
         if players:
             rosters[slot] = dict(total=int(float(tot.group(1))) if tot else 0,
@@ -97,7 +102,6 @@ def parse_sim_results() -> tuple[list[dict], dict[int, dict]]:
 
 def split_lineup(players: list[dict]) -> tuple[list[dict], list[dict]]:
     """Assign the optimal starting lineup; everything else is bench."""
-    order = {"QB": 1, "RB": 2, "WR": 3, "TE": 1, "K": 1, "DST": 1}
     pools = defaultdict(list)
     for p in players:
         pools[p["pos"]].append(p)
@@ -266,7 +270,7 @@ def main():
     board = [dict(player=r["player"], pos=r["pos"], team=r["team"], tier=r["tier"],
                   proj=r["proj"], adp=f"{r['adp']:g}", edge=r["edge"]) for r in rows]
 
-    risk = [dict(player=p, pos=q, games=g, note=n) for p, q, g, n in RISK_NOTES]
+    risk = [dict(player=p, pos=q, games=f"{g:g}", note=n) for p, q, g, n in RISK_NOTES]
 
     tpl = (Path(__file__).resolve().parent / "artifact_template.html").read_text(encoding="utf-8")
     n_slots = max(len(slots), 1)
@@ -280,9 +284,9 @@ def main():
             .replace("__FADES_JSON__", json.dumps(slim(fades)))
             .replace("__NPLAYERS__", str(len(rows)))
             # strategy study + roster search + round frequency + these round plans
-            .replace("__NDRAFTS__", f"{len(strategies) * n_slots * 60 + n_slots * (250 + 250 + PLAN_DRAFTS):,}")
-            .replace("__NSEASONS__", f"{len(strategies) * n_slots * 600 + n_slots * 250 * 40:,}")
-            .replace("__ROSTERSEARCH__", "250")
+            .replace("__NDRAFTS__", f"{len(strategies) * n_slots * 60 + n_slots * (180 + 180 + PLAN_DRAFTS):,}")
+            .replace("__NSEASONS__", f"{len(strategies) * n_slots * 600 + n_slots * 180 * 30:,}")
+            .replace("__ROSTERSEARCH__", "180")
             .replace("__GENERATED__", date.today().strftime("%-d %B %Y")))
 
     dest = ART / "draft-board.html"

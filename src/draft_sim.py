@@ -387,6 +387,20 @@ def run_draft(players: list[Player], my_slot: int, strategy: str, rng: random.Ra
     me = my_slot - 1
     plan = STRATEGIES.get(strategy)
 
+    # Our own pick numbers through the snake, and the VONA horizon for each.
+    #
+    # The horizon is NOT simply "my next pick". At a turn the two picks are
+    # adjacent (48 then 49), so every position's next-available player is the
+    # same one you would take anyway, every VONA collapses toward zero, and the
+    # choice gets decided by noise. The meaningful question at a turn is what
+    # survives to the pick *after* the pair, so skip adjacent picks.
+    my_picks = [(r * teams + my_slot) if r % 2 == 0 else ((r + 1) * teams - my_slot + 1)
+                for r in range(ROUNDS)]
+    horizon = []
+    for r, pk in enumerate(my_picks):
+        nxt = next((q for q in my_picks[r + 1:] if q - pk >= 6), my_picks[-1] + teams)
+        horizon.append(nxt)
+
     pick_no = 0
     for rnd in range(ROUNDS):
         order = range(teams) if rnd % 2 == 0 else reversed(range(teams))
@@ -396,13 +410,7 @@ def run_draft(players: list[Player], my_slot: int, strategy: str, rng: random.Ra
                 break
             if t == me:
                 if strategy == "MODEL":
-                    # Where our next turn lands in the snake, used for VONA.
-                    slot = my_slot
-                    if rnd % 2 == 0:
-                        gap = 2 * (teams - slot) + 1
-                    else:
-                        gap = 2 * slot - 1
-                    choice = model_pick(board[t], available, rnd, pick_no + gap, rng)
+                    choice = model_pick(board[t], available, rnd, horizon[rnd], rng)
                 else:
                     choice = strategy_pick(board[t], available, rnd, plan, rng)
             else:
