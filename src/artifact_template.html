@@ -440,18 +440,24 @@ function render(){
   document.getElementById('lineup-cap').innerHTML =
     `Best roster found from pick <b class="mono">${slot}</b> &middot; ` +
     `<b class="mono">${r.total}</b> expected starting-lineup points, Weeks 1&ndash;14 ` +
-    `<span style="color:var(--ink-3)">(best of 180 drafts, so read the shape rather than the total)</span>`;
+    `<span style="color:var(--ink-3)">(best of 180 drafts, so read the shape rather than the total). ` +
+    `Where a slot reads &ldquo;stream it&rdquo;, the model spent its last pick on upside instead &mdash; ` +
+    `kicker and defence are weekly streams, not roster investments.</span>`;
   const body = document.getElementById('lineup-body');
   body.innerHTML = '';
   const starters = r.starters, bench = r.bench;
   const addRow = (row, cls) => {
     const tr = document.createElement('tr');
     if (cls) tr.className = cls;
+    const filler = row.player === 'Waiver tier';
     tr.innerHTML = `<td class="slot">${row.slot || ''}</td>
-      <td class="nm">${row.player}</td>
+      <td class="nm">${filler
+        ? '<i style="font-weight:400;color:var(--ink-3)">stream it &mdash; any startable ' + row.pos + '</i>'
+        : row.player}</td>
       <td><span class="pos ${row.pos}">${row.pos}</span></td>
-      <td class="mono" style="font-size:12px;color:var(--ink-3)">${row.team}</td>
-      <td class="num">${row.bye}</td><td class="num">${row.proj}</td>`;
+      <td class="mono" style="font-size:12px;color:var(--ink-3)">${filler ? '—' : row.team}</td>
+      <td class="num">${filler ? '—' : row.bye}</td>
+      <td class="num">${filler ? '—' : row.proj}</td>`;
     body.appendChild(tr);
   };
   starters.forEach(x => addRow(x));
