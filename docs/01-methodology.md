@@ -92,7 +92,7 @@ the whole draft is simulated:
 - **Scoring** is split into the fantasy regular season (Weeks 1–14) and the
   fantasy playoffs (Weeks 15–17).
 
-## Three bugs worth reporting
+## Four bugs worth reporting
 
 The first version of this model produced results I did not believe, and chasing
 them down changed the conclusions. Recording them because the corrections are
@@ -116,6 +116,21 @@ player at his own position likely to survive to your *next* pick. If he will
 still be there, taking him now buys nothing. This is what pushes quarterback to
 round 9 and receivers to the front, and it is the single change that moved the
 recommended strategy from worst to best.
+
+**Opportunity cost went degenerate at snake turns.** A test asserting the model
+never spends premium capital on a quarterback caught this one. At a turn your two
+picks are adjacent — 48 then 49 — so the best player at *every* position still
+available "at your next pick" is the same player you would take anyway. Every
+VONA collapsed toward zero, and the choice fell to whichever position happened to
+have a non-zero gap. At pick 48 that was quarterback, on an 18-point edge that
+means nothing. The horizon is now the next pick at least six selections away, so
+at a turn the model asks what survives to the pick *after* the pair — which is
+the question that actually matters there. Worth roughly 30–45 points a season.
+
+The checks in `src/test_model.py` exist to stop all four regressing. The most
+useful one asserts that lineup value has diminishing returns — that the ninth
+receiver adds less than the third — which is exactly the property the
+receiver-stacking bug violated.
 
 ## Honest limitations
 

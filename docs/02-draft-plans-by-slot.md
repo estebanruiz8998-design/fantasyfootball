@@ -15,9 +15,11 @@ your top two targets are gone, move to the next name rather than reaching.
    spent on the smallest positional edge on the board.
 2. **Take the last player in a tier, not the first player in the next one.**
    Check `output/tiers.md`. The cliffs are where value lives.
-3. **The RB pocket is rounds 5–8.** D'Andre Swift, Tony Pollard, David
-   Montgomery, RJ Harvey, Bhayshul Tuten and Jonathon Brooks all sit at or below
-   replacement cost while backs drafted in rounds 2–4 sit above it.
+3. **The RB pocket is rounds 5–8.** D'Andre Swift (+23 value over
+   replacement), Tony Pollard (+20) and David Montgomery (+15) all clear
+   replacement level while costing a fraction of a round-2 back. Note the model
+   still prefers receivers at those same picks on raw value — take the backs when
+   the receiver tier in front of you has broken, which is what its own drafts do.
 4. **Spend your last five picks on ceiling, not floor.** A bench player is worth
    nothing unless he becomes a starter. Handcuff your own backs first, then take
    swings.
@@ -100,10 +102,14 @@ the loudest fade on the board and he will be sitting there looking like value.
 ## The rounds where drafts are actually won
 
 **Rounds 5–8 — the running back pocket.** Every year the position everyone
-panicked about in round 2 is available at cost four rounds later. This year that
-is D'Andre Swift (55), Tony Pollard (52), David Montgomery (58), RJ Harvey (63)
-and Bhayshul Tuten (78) — Travis Etienne is gone to New Orleans and Tuten has a
-clear runway.
+panicked about in round 2 is available at a fraction of the cost four rounds
+later. The three the model actually likes here are **D'Andre Swift** (ADP 55,
++23 VOR), **Tony Pollard** (52, +20) and **David Montgomery** (58, +15).
+
+Two names commonly recommended in this range that the model does *not* endorse
+at cost: RJ Harvey (63) is stuck in a three-back Payton committee, and Bhayshul
+Tuten (78) has the clear runway everyone likes but only projects a point above
+replacement. Take them as upside darts two rounds later, not as your RB2.
 
 **Rounds 8–10 — quarterback.** Justin Herbert at 92 with Mike McDaniel calling
 plays and Keenan Allen gone to Indianapolis. Jaxson Dart at 100, who was QB3 in

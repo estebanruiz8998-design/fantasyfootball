@@ -213,14 +213,15 @@ footer a{color:var(--ink-2)}
       <div class="finding">
         <div class="k">14 of 16</div>
         <div class="t">Biggest reaches are running backs</div>
-        <p>The backs going late in round one and through round two consistently score below their draft
-          cost in simulation. The market is still paying 2019 prices for the position.</p>
+        <p>Among starters, fourteen of the sixteen largest gaps between ADP and model value in the wrong
+          direction are running backs. The market is still paying 2019 prices for the position.</p>
       </div>
       <div class="finding">
-        <div class="k">+131</div>
+        <div class="k">+133</div>
         <div class="t">Elite tight end edge</div>
         <p>Bowers and McBride project ~250 points against a replacement level near 119. That is a
-          bigger weekly edge than any running back available in round two.</p>
+          bigger weekly edge than any running back available in round two, and it holds every week
+          rather than needing a matchup.</p>
       </div>
     </div>
   </div>
@@ -347,7 +348,7 @@ footer a{color:var(--ink-2)}
         <p>Value over replacement uses actual starter demand, with flex slots awarded one at a time to
           whichever of RB, WR or TE wins them. Then the whole draft is simulated, because a cheat sheet
           cannot tell you whether a plan survives eleven other drafters.</p>
-        <h3>Three bugs that changed the answer</h3>
+        <h3>Four bugs that changed the answer</h3>
         <ul>
           <li><b>The board ran out.</b> A 12-team, 16-round draft consumes 192 picks; the pool held 173.
             Drafts silently truncated and thin rosters looked survivable.</li>
@@ -356,6 +357,10 @@ footer a{color:var(--ink-2)}
           <li><b>Marginal value drafted a quarterback first overall.</b> With an empty roster, absolute
             points win. Adding opportunity cost &mdash; value over <i>next available</i> &mdash; is what moved
             this strategy from worst to best.</li>
+          <li><b>Opportunity cost went degenerate at turns.</b> At a snake turn your picks are adjacent
+            (48, then 49), so every position&rsquo;s next-available player is the same one you would take
+            anyway and every comparison collapses to zero. The horizon now skips adjacent picks. Worth
+            30&ndash;45 points a season.</li>
         </ul>
       </div>
       <div class="prose">

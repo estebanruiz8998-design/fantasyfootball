@@ -182,8 +182,8 @@ def rationale(players: list[dict], slot: int) -> list[dict]:
         out.append(dict(
             h="The running back pocket",
             p="Rounds five to eight: " + ", ".join(p["player"] for p in pocket[:3]) +
-              ". These backs sit at or below replacement cost while the ones drafted in rounds two "
-              "to four sit well above it.",
+              ". Backs in this range still clear replacement level while costing a fraction of "
+              "what the round-two backs do.",
         ))
 
     byes = Counter(p["bye"] for p in players)

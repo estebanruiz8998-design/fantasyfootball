@@ -15,9 +15,10 @@ Murray (140) all rank 25 or more picks ahead of where they are drafted. Dart was
 QB3 in fantasy points per dropback in 2025, behind only Josh Allen and Drake
 Maye.
 
-**2. Receivers are underpriced relative to running backs.** Of the sixteen
-largest gaps between ADP and model value in the wrong direction, fourteen are
-running backs. The backs going late in round one and through round two — Achane,
+**2. Receivers are underpriced relative to running backs.** Among starters —
+excluding kickers, defences and the late-round backs whose value is contingent on
+an injury — fourteen of the sixteen largest gaps between ADP and model value in
+the wrong direction are running backs. The backs going late in round one and through round two — Achane,
 Barkley, Irving, Judkins — consistently score below their draft cost in
 simulation. Meanwhile Nico Collins, George Pickens, Emeka Egbuka, Zay Flowers and
 Ladd McConkey all sit 8–13 picks below their value.
@@ -60,7 +61,7 @@ The model's highest-expectation rosters vary by slot, but they share a structure
 |---|---|
 | 1–2 | An anchor: an elite back at picks 1–2, otherwise the best receiver. Take **Bowers or McBride** in round 2 if you pick 5–11 — they reach you there. |
 | 3–4 | Receivers. Nico Collins, Pickens, Egbuka, McMillan, Flowers, McConkey. |
-| 5–8 | **The running back pocket.** Swift, Pollard, Montgomery, Harvey, Tuten, Brooks — at or below replacement cost. |
+| 5–8 | **The running back pocket.** D'Andre Swift (+23 VOR), Tony Pollard (+20), David Montgomery (+15) still clear replacement level at a fraction of a round-2 back's cost. This is where your RB2 and flex come from. |
 | 8–9 | **One quarterback.** Herbert or Dart. Not before. |
 | 10–12 | The tight end you skipped (Ferguson, Okonkwo), then handcuff your own backs. |
 | 13–14 | Ceiling swings: Tre' Harris, Stribling, Michael Wilson, Worthy. |
@@ -71,7 +72,7 @@ Per-slot rosters and pick-by-pick plans are in
 [`output/sim_results.md`](../output/sim_results.md).
 
 **A caveat on the "best roster" tables.** Those are the maximum of a noisy
-estimate over 250 simulated drafts, so the point totals are optimistic by
+estimate over 180 simulated drafts, so the point totals are optimistic by
 construction — the winner's curse. Read them for **shape**, not for the number.
 The strategy table above is the unbiased comparison.
 
@@ -115,5 +116,5 @@ estimated for most players; check your own platform, because ADP varies
 enormously between Sleeper, ESPN and NFFC. And verify the injury board — Nabers,
 Kittle, Kraft, Skattebo and the Atlanta quarterback job all move week to week.
 
-Full accounting, including the three bugs whose corrections changed these
+Full accounting, including the four bugs whose corrections changed these
 conclusions, is in [`01-methodology.md`](01-methodology.md).
