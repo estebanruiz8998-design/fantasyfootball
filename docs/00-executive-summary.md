@@ -18,10 +18,11 @@ Maye.
 **2. Receivers are underpriced relative to running backs.** Among starters —
 excluding kickers, defences and the late-round backs whose value is contingent on
 an injury — fourteen of the sixteen largest gaps between ADP and model value in
-the wrong direction are running backs. The backs going late in round one and through round two — Achane,
-Barkley, Irving, Judkins — consistently score below their draft cost in
-simulation. Meanwhile Nico Collins, George Pickens, Emeka Egbuka, Zay Flowers and
-Ladd McConkey all sit 8–13 picks below their value.
+the wrong direction are running backs. The backs going late in round one and
+through round two are all drafted ahead of where the model values them — Achane
+by 14 picks, Barkley by 23, Irving and Judkins by 48 each. Meanwhile Nico
+Collins, George Pickens, Emeka Egbuka, Zay Flowers and Ladd McConkey all sit
+8–13 picks below their value.
 
 **3. Rigid strategies lose to flexible ones.** This was the most useful thing the
 simulator produced, and it is the opposite of how most draft guides are written.
